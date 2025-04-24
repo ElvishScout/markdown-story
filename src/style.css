@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+* {
+  @apply outline-none;
+}
+
+:root {
+  @apply font-serif md:text-lg bg-white selection:bg-amber-100;
+}
+
+body {
+  @apply overscroll-none;
+}
+
+#root {
+  @apply relative w-screen h-screen px-2 md:px-12 py-4 md:py-8 overflow-auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+.container {
+  @apply w-full;
+}

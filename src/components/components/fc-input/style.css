@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+.fc-input {
+  @apply relative;
+}
+
+.fc-input-text {
+  @apply relative px-2 py-0.5 w-fit border-b-2 border-red-700 whitespace-pre;
+}
+
+.fc-input-text:has(input[disabled]) {
+  @apply bg-red-100;
+}
+
+.fc-input-text,
+.fc-input-text * {
+  @apply cursor-text;
+}
+
+.fc-input-text input {
+  @apply absolute left-0 right-0 text-center;
+}
+
+.fc-input-text div {
+  @apply inline-block min-w-16 max-w-64 invisible;
+}
+
+.fc-input-checkbox {
+  @apply -my-1 p-1;
+}
+
+.fc-input-checkbox,
+.fc-input-checkbox * {
+  @apply cursor-pointer;
+}
+
+.fc-input-checkbox input {
+  @apply absolute inset-0 z-10 opacity-0;
+}
+
+.fc-input-checkbox div {
+  @apply relative inline-block -top-0.5 w-4 h-4 align-middle border-2 border-red-700 rounded-full text-2xl leading-4;
+}
+
+.fc-input-checkbox div::after {
+  @apply absolute content-[""];
+}
+
+.fc-input-checkbox:has(input:checked) div::after {
+  @apply content-["\1f5f8"];
+}
+
+.fc-input-checkbox:has(input[disabled]) div {
+  @apply bg-red-100;
+}
