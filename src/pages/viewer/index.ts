@@ -5,9 +5,7 @@ import { RenderOptions, Story, StoryPrompt } from "@/src/lib/story";
 export const createViewer = (root: HTMLElement) => {
   const content = sessionStorage.getItem("content");
   if (content === null) {
-    const url = new URL(location.href);
-    url.searchParams.set("mode", "editor");
-    location.href = url.href;
+    location.href = "?mode=editor";
     return;
   }
 
