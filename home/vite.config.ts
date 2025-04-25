@@ -10,7 +10,7 @@ const fixBrotliWasm = (): PluginOption => {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         if (req.url?.endsWith("brotli_wasm_bg.wasm")) {
-          const filePath = path.resolve(__dirname, "node_modules/brotli-wasm/pkg.web/brotli_wasm_bg.wasm");
+          const filePath = path.resolve(__dirname, "../node_modules/brotli-wasm/pkg.web/brotli_wasm_bg.wasm");
           const fileContent = await fs.readFile(filePath);
           res.setHeader("Content-Type", "application/wasm");
           res.statusCode = 200;
@@ -24,13 +24,20 @@ const fixBrotliWasm = (): PluginOption => {
 };
 
 export default defineConfig({
+  plugins: [tailwindcss(), fixBrotliWasm()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname),
     },
   },
-  plugins: [tailwindcss(), fixBrotliWasm()],
+  root: path.resolve(__dirname),
   build: {
-    outDir: "./dist",
+    outDir: path.resolve(__dirname, "../dist"),
+    emptyOutDir: false,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+      },
+    },
   },
 });

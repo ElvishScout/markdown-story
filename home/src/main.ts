@@ -1,11 +1,11 @@
 import "./style.css";
 
 import { defineComponents } from "./components";
-import { createViewer } from "./pages/viewer";
+import { createPreview } from "./pages/preview";
+import { createEditor } from "./pages/editor";
 import { decodeAndDecompress } from "./utils/codec";
 
 import icon from "./assets/icon.png";
-import { createEditor } from "./pages/editor";
 
 const createApp = async (root: HTMLElement) => {
   const link = document.querySelector("link[rel=icon]") as HTMLLinkElement | null;
@@ -23,9 +23,9 @@ const createApp = async (root: HTMLElement) => {
     sessionStorage.setItem("content", decodedContent);
   }
 
-  if (mode === "viewer") {
-    root.classList.add("viewer");
-    createViewer(root);
+  if (mode === "preview") {
+    root.classList.add("preview");
+    createPreview(root);
   } else {
     root.classList.add("editor");
     createEditor(root);

@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+* {
+  @apply outline-none;
+}
+
+:root {
+  @apply font-serif bg-white selection:bg-amber-100;
+}
+
+body {
+  @apply overflow-auto;
+}
+
+#root {
+  @apply px-2 md:px-12 py-4 md:py-8 md:text-lg;
+  scrollbar-gutter: stable both-edges;
+}
+
 .story-heading {
   @apply mb-4 text-3xl text-center;
 }

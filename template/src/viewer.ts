@@ -1,21 +1,30 @@
-import "./style.css";
+import { Story, RenderOptions, StoryPrompt } from "./lib/story";
 
-import { Story, RenderOptions, StoryPrompt } from "@/src/lib/story";
+export const createViewer = (root: HTMLElement, content: string) => {
+  const story = new Story(content.replace(/\r\n/g, "\n"));
 
-export const createViewer = (root: HTMLElement) => {
-  const content = sessionStorage.getItem("content");
-  if (content === null) {
-    location.href = "?mode=editor";
-    return;
+  if (story.stylesheet) {
+    const style = document.createElement("style");
+    style.innerHTML = story.stylesheet;
+    document.head.append(style);
+  }
+  
+  if (story.metadata.title) {
+    document.title = story.metadata.title;
+    const heading = document.createElement("h1");
+    heading.classList.add("story-heading");
+    heading.innerText = story.metadata.title;
+    root.append(heading);
   }
 
-  const story = new Story(content.replace(/\r\n/g, "\n"));
   const storyChapters = document.createElement("div");
   storyChapters.classList.add("story-chapters");
+  root.append(storyChapters);
 
   const cover = document.createElement("div");
   cover.classList.add("viewer-cover");
   cover.innerText = "Click to start";
+  root.append(cover);
 
   cover.onclick = () => cover.remove();
 
@@ -67,18 +76,4 @@ export const createViewer = (root: HTMLElement) => {
   };
 
   window.addEventListener("click", () => story.play(prompt, options), { once: true });
-
-  if (story.stylesheet) {
-    const style = document.createElement("style");
-    style.innerHTML = story.stylesheet;
-    document.head.append(style);
-  }
-  if (story.metadata.title) {
-    document.title = story.metadata.title;
-    const heading = document.createElement("h1");
-    heading.classList.add("story-heading");
-    heading.innerText = story.metadata.title;
-    root.append(heading);
-  }
-  root.append(storyChapters, cover);
 };

@@ -32,6 +32,7 @@ export const createEditor = (root: HTMLElement) => {
   }
 
   const buttons = document.createElement("div");
+  buttons.classList.add("button-group");
   tools.append(buttons);
 
   const copy = document.createElement("button");
@@ -65,7 +66,7 @@ export const createEditor = (root: HTMLElement) => {
 
   preview.onclick = () => {
     sessionStorage.setItem("content", editor.value);
-    window.open("?mode=viewer", "_blank");
+    window.open("?mode=preview", "_blank");
   };
 
   const content = sessionStorage.getItem("content");

@@ -13,6 +13,5 @@ body {
 }
 
 #root {
-  @apply px-2 md:px-12 py-4 md:py-8 md:text-lg;
   scrollbar-gutter: stable both-edges;
 }

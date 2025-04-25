@@ -1,5 +1,7 @@
+import { BrotliWasmType } from "brotli-wasm";
+
 const loadBrotli = (() => {
-  let brotliPromise = null;
+  let brotliPromise: Promise<BrotliWasmType> | null = null;
   return async () => {
     brotliPromise ??= (await import("brotli-wasm")).default;
     return brotliPromise;
