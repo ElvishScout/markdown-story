@@ -1,5 +1,6 @@
 import "./style.css";
 
+import { compressAndEncode } from "@/src/utils/codec";
 import FcEditor from "@/src/components/components/fc-editor";
 
 export const createEditor = (root: HTMLElement) => {
@@ -22,7 +23,6 @@ export const createEditor = (root: HTMLElement) => {
   label.append(span);
 
   const select = document.createElement("select");
-  select.classList.add("editor-tabsize");
   label.append(select);
 
   for (let i = 1; i <= 8; i++) {
@@ -31,11 +31,18 @@ export const createEditor = (root: HTMLElement) => {
     select.append(option);
   }
 
-  const button = document.createElement("button");
-  button.classList.add("preview-button");
-  button.type = "button";
-  button.innerText = "Preview";
-  tools.append(button);
+  const buttons = document.createElement("div");
+  tools.append(buttons);
+
+  const copy = document.createElement("button");
+  copy.type = "button";
+  copy.innerText = "Copy URL";
+  buttons.append(copy);
+
+  const preview = document.createElement("button");
+  preview.type = "button";
+  preview.innerText = "Preview";
+  buttons.append(preview);
 
   const editor = document.createElement("textarea", { is: "fc-editor" }) as FcEditor;
   editor.ariaLabel = "editor";
@@ -47,7 +54,16 @@ export const createEditor = (root: HTMLElement) => {
   select.value = "2";
   editor.tabSize = 2;
 
-  button.onclick = () => {
+  copy.onclick = async () => {
+    const encodedContent = await compressAndEncode(editor.value);
+    const url = new URL(location.href);
+    url.searchParams.set("mode", "editor");
+    url.searchParams.set("content", encodedContent);
+    navigator.clipboard.writeText(url.href);
+    alert("URL copied to clipboard successfully.");
+  };
+
+  preview.onclick = () => {
     sessionStorage.setItem("content", editor.value);
     window.open("?mode=viewer", "_blank");
   };

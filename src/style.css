@@ -5,18 +5,14 @@
 }
 
 :root {
-  @apply font-serif md:text-lg bg-white selection:bg-amber-100;
+  @apply font-serif bg-white selection:bg-amber-100;
 }
 
 body {
-  @apply overscroll-none;
+  @apply overflow-auto;
 }
 
 #root {
-  @apply relative w-screen h-screen px-2 md:px-12 py-4 md:py-8 overflow-auto;
+  @apply px-2 md:px-12 py-4 md:py-8 md:text-lg;
   scrollbar-gutter: stable both-edges;
-}
-
-.container {
-  @apply w-full;
 }

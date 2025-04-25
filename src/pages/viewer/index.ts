@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { RenderOptions, Story, StoryPrompt } from "@/src/lib/story";
+import { Story, RenderOptions, StoryPrompt } from "@/src/lib/story";
 
 export const createViewer = (root: HTMLElement) => {
   const content = sessionStorage.getItem("content");
@@ -10,28 +10,12 @@ export const createViewer = (root: HTMLElement) => {
   }
 
   const story = new Story(content.replace(/\r\n/g, "\n"));
-
-  if (story.stylesheet) {
-    const style = document.createElement("style");
-    style.innerHTML = story.stylesheet;
-    document.head.append(style);
-  }
-  if (story.metadata.title) {
-    document.title = story.metadata.title;
-    const heading = document.createElement("h1");
-    heading.classList.add("story-heading");
-    heading.innerText = story.metadata.title;
-    root.append(heading);
-  }
-
   const storyChapters = document.createElement("div");
   storyChapters.classList.add("story-chapters");
-  root.append(storyChapters);
 
   const cover = document.createElement("div");
   cover.classList.add("viewer-cover");
   cover.innerText = "Click to start";
-  root.append(cover);
 
   cover.onclick = () => cover.remove();
 
@@ -73,14 +57,28 @@ export const createViewer = (root: HTMLElement) => {
       animation.onfinish = () => cover.remove();
       animation.play();
 
-      chapter.scrollIntoView({ behavior: "smooth" });
+      chapter.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
 
   const options: RenderOptions = {
     format: "html",
-    tagMap: { input: "fc-input", button: "fc-button" },
+    tagMap: { input: "fc-input" },
   };
 
   window.addEventListener("click", () => story.play(prompt, options), { once: true });
+
+  if (story.stylesheet) {
+    const style = document.createElement("style");
+    style.innerHTML = story.stylesheet;
+    document.head.append(style);
+  }
+  if (story.metadata.title) {
+    document.title = story.metadata.title;
+    const heading = document.createElement("h1");
+    heading.classList.add("story-heading");
+    heading.innerText = story.metadata.title;
+    root.append(heading);
+  }
+  root.append(storyChapters, cover);
 };

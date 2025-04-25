@@ -5,7 +5,7 @@
 }
 
 .chapter {
-  @apply relative mt-8 px-2 pb-8 last:pb-[25%] first:mt-0 border-b-2 border-red-700 last:border-none overflow-hidden;
+  @apply relative mt-8 px-2 pb-8 last:pb-[25vh] first:mt-0 border-b-2 border-red-700 last:border-none overflow-hidden;
 }
 
 .chapter.finished {
@@ -22,6 +22,30 @@
 
 .chapter p {
   @apply my-2;
+}
+
+.chapter .fc-input-text {
+  @apply px-2 py-0.5 border-b-2 border-red-700;
+}
+
+.chapter .fc-input-text:has(input[disabled]) {
+  @apply bg-red-100;
+}
+
+.chapter .fc-input-checkbox div {
+  @apply border-2 border-red-700 rounded-full;
+}
+
+.chapter .fc-input-checkbox:has(input[disabled]) div {
+  @apply bg-red-100;
+}
+
+.chapter button[type="submit"] {
+  @apply px-1 text-red-600 hover:text-red-400 active:text-red-300 underline cursor-pointer;
+}
+
+.chapter button[type="submit"]:disabled {
+  @apply text-red-600;
 }
 
 .viewer-cover {

@@ -2,37 +2,35 @@ import "./style.css";
 
 import { defineComponents } from "./components";
 import { createViewer } from "./pages/viewer";
-import { decode } from "./utils/b64u";
+import { decodeAndDecompress } from "./utils/codec";
 
 import icon from "./assets/icon.png";
 import { createEditor } from "./pages/editor";
 
+const createApp = async (root: HTMLElement) => {
+  const link = document.querySelector("link[rel=icon]") as HTMLLinkElement | null;
+  if (link) {
+    link.href = icon;
+  }
+
+  const { searchParams } = new URL(location.href);
+
+  const mode = searchParams.get("mode");
+  const content = searchParams.get("content");
+
+  if (content !== null) {
+    const decodedContent = await decodeAndDecompress(content);
+    sessionStorage.setItem("content", decodedContent);
+  }
+
+  if (mode === "viewer") {
+    root.classList.add("viewer");
+    createViewer(root);
+  } else {
+    root.classList.add("editor");
+    createEditor(root);
+  }
+};
+
 defineComponents();
-
-const link = document.querySelector("link[rel=icon]") as HTMLLinkElement | null;
-if (link) {
-  link.href = icon;
-}
-
-const root = document.querySelector("#root") as HTMLDivElement;
-
-const { searchParams } = new URL(location.href);
-
-const container = document.createElement("div");
-container.classList.add("container");
-root.append(container);
-
-const mode = searchParams.get("mode");
-const content = searchParams.get("content");
-
-if (content !== null) {
-  sessionStorage.setItem("content", decode(content));
-}
-
-if (mode === "viewer") {
-  container.classList.add("viewer");
-  createViewer(container);
-} else {
-  container.classList.add("editor");
-  createEditor(container);
-}
+createApp(document.querySelector("#root")!);

@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-.container.editor {
-  @apply w-full h-full flex flex-col;
+.editor {
+  @apply w-screen h-screen flex flex-col;
 }
 
 .editor .fc-editor {
-  @apply grow min-h-64 resize-none;
+  @apply grow min-h-32 resize-none;
 }
 
 .editor-heading {
@@ -13,13 +13,13 @@
 }
 
 .editor-tools {
-  @apply my-2 px-4 flex justify-between;
+  @apply my-2 px-6 flex justify-between;
 }
 
-.editor-tabsize {
+.editor-tools select {
   @apply w-16 text-center cursor-pointer;
 }
 
-.preview-button {
-  @apply px-1 text-red-600 hover:text-red-400 active:text-red-300 underline cursor-pointer;
+.editor-tools button {
+  @apply mr-4 last:mr-0 text-red-600 hover:text-red-400 active:text-red-300 underline cursor-pointer;
 }
