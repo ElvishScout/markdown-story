@@ -1,4 +1,7 @@
 import { Story, RenderOptions, StoryPrompt } from "./lib/story";
+import { FcInput } from "./components";
+
+customElements.define("fc-input", FcInput);
 
 export const createViewer = (root: HTMLElement, content: string) => {
   const story = new Story(content.replace(/\r\n/g, "\n"));
@@ -8,7 +11,7 @@ export const createViewer = (root: HTMLElement, content: string) => {
     style.innerHTML = story.stylesheet;
     document.head.append(style);
   }
-  
+
   if (story.metadata.title) {
     document.title = story.metadata.title;
     const heading = document.createElement("h1");

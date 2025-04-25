@@ -1,7 +1,9 @@
 import "./style.css";
 
 import { compressAndEncode } from "@/src/utils/codec";
-import FcEditor from "@/src/components/components/fc-editor";
+import { FcEditor } from "@/src/components";
+
+customElements.define("fc-editor", FcEditor, { extends: "textarea" });
 
 export const createEditor = (root: HTMLElement) => {
   document.title = "Source Editor";

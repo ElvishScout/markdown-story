@@ -1,7 +1,7 @@
 import "./style.css";
 import checkmarkImage from "./assets/checkmark.svg";
 
-export default class extends HTMLElement {
+export class FcInput extends HTMLElement {
   constructor() {
     super();
 

@@ -1,6 +1,5 @@
 import "./style.css";
 
-import { defineComponents } from "./components";
 import { createPreview } from "./pages/preview";
 import { createEditor } from "./pages/editor";
 import { decodeAndDecompress } from "./utils/codec";
@@ -32,5 +31,4 @@ const createApp = async (root: HTMLElement) => {
   }
 };
 
-defineComponents();
 createApp(document.querySelector("#root")!);

@@ -1,10 +1,6 @@
 import "./style.css";
 
-export default class extends HTMLTextAreaElement {
-  static get options(): ElementDefinitionOptions {
-    return { extends: "textarea" };
-  }
-
+export class FcEditor extends HTMLTextAreaElement {
   private _tabSize: number = 2;
 
   constructor() {

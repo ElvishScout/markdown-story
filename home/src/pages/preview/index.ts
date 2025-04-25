@@ -22,11 +22,9 @@ const insertContent = (text: string, content: string) => {
 };
 
 export const createPreview = async (root: HTMLElement) => {
-  const content = sessionStorage.getItem("content");
-  if (content === null) {
-    location.href = "?mode=editor";
-    return;
-  }
+  document.title = "Preview";
+
+  const content = sessionStorage.getItem("content") ?? "";
 
   const template = await (await fetch("/template.html")).text();
   const srcdoc = insertContent(template, content);
