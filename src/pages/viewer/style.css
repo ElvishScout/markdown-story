@@ -32,11 +32,11 @@
   @apply bg-red-100;
 }
 
-.chapter .fc-input-checkbox div {
+.chapter .fc-input-checkbox .circle {
   @apply border-2 border-red-700 rounded-full;
 }
 
-.chapter .fc-input-checkbox:has(input[disabled]) div {
+.chapter .fc-input-checkbox:has(input[disabled]) .circle {
   @apply bg-red-100;
 }
 

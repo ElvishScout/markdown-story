@@ -1,9 +1,10 @@
 import "./style.css";
+import checkmarkImage from "./assets/checkmark.svg";
 
 export default class extends HTMLElement {
   constructor() {
     super();
-    
+
     const childAttrs = ["name", "type", "value", "checked", "required", "readonly", "aria-label"];
 
     this.classList.add("fc-input");
@@ -24,14 +25,21 @@ export default class extends HTMLElement {
 
     if (input.type === "text") {
       const div = document.createElement("div");
+      div.classList.add("placeholder");
+      div.innerText = input.value;
+      this.append(div);
       input.addEventListener("input", () => {
         div.innerText = input.value;
       });
-      div.innerText = input.value;
-      this.append(div);
     } else if (input.type === "checkbox") {
-      const div = document.createElement("div");
-      this.append(div);
+      const circle = document.createElement("div");
+      circle.classList.add("circle");
+      this.append(circle);
+      const checkmark = document.createElement("div");
+      checkmark.classList.add("checkmark");
+      console.log(checkmarkImage);
+      checkmark.style.backgroundImage = `url("${checkmarkImage}")`;
+      circle.append(checkmark);
     }
   }
 }

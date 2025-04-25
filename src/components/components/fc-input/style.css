@@ -17,7 +17,7 @@
   @apply absolute left-0 right-0 text-center;
 }
 
-.fc-input-text div {
+.fc-input-text .placeholder {
   @apply inline-block min-w-16 max-w-64 invisible;
 }
 
@@ -34,14 +34,14 @@
   @apply absolute inset-0 z-10 opacity-0;
 }
 
-.fc-input-checkbox div {
-  @apply relative inline-block -top-0.5 w-4 h-4 align-middle text-2xl leading-4;
+.fc-input-checkbox .circle {
+  @apply relative inline-block -top-0.5 w-4 h-4 align-middle;
 }
 
-.fc-input-checkbox div::after {
-  @apply absolute content-[""];
+.fc-input-checkbox .checkmark {
+  @apply absolute left-[10%] top-[-35%] w-[140%] h-[140%] bg-none;
 }
 
-.fc-input-checkbox:has(input:checked) div::after {
-  @apply content-["\1f5f8"];
+.fc-input-checkbox:has(input:checked) .checkmark {
+  @apply bg-contain;
 }
