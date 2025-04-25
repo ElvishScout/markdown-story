@@ -5,7 +5,7 @@
 }
 
 .chapter {
-  @apply relative block mt-8 px-2 pb-8 first:mt-0 border-b-2 border-red-700 last:border-none overflow-hidden last:h-[75vh];
+  @apply relative mt-8 px-2 pb-8 last:pb-[25%] first:mt-0 border-b-2 border-red-700 last:border-none overflow-hidden;
 }
 
 .chapter.finished {
